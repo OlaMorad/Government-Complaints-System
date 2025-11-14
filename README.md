@@ -94,12 +94,4 @@ The application was developed following a layered architecture, separating the u
 ### **9. High Availability**
 - System designed to maintain stable operation and minimize downtime.
 
----
-
-If you want, I can also:  
-✨ Add architecture diagrams  
-✨ Add API endpoints documentation  
-✨ Add technologies used (Flutter, React, Spring, etc.)  
-✨ Format it in a more stylish GitHub-friendly layout  
-
-Just tell me!  
+--- 
