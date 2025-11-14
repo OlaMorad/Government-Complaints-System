@@ -1,59 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Government Complaints Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Project Overview
 
-## About Laravel
+We implemented a fully integrated **Government Complaints Management System** that enables citizens to easily submit complaints, attach supporting documents, and follow up on their status in real time.  
+The system consists of a **mobile application** for citizens and a **web-based dashboard** for government employees and the system administrator.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Throughout the project, we implemented secure authentication with OTP verification, developed a structured complaint submission workflow, and built a complete tracking system that updates citizens instantly using in-app notifications.  
+On the administration side, we implemented tools for government departments to manage complaints, update statuses, add notes, request additional information, and generate analytical reports. The system also supports role-based access control, logging, versioning, and scalability features.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The application was developed following a layered architecture, separating the user interface, business logic, and data management to ensure maintainability and performance.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ✔️ Functional Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### **1. User Registration & Login**
+- Users can create accounts using email or phone number.
+- OTP verification is required before activating the account.
+- Accounts cannot be used until fully verified.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### **2. Complaint Submission**
+- Citizens can submit detailed complaints including:
+  - Complaint type  
+  - Related government department  
+  - Description of the issue  
+  - Location information  
+  - Image and document attachments
+- A unique reference ID is generated for each complaint.
 
-## Laravel Sponsors
+### **3. Complaint Status Tracking**
+- Users can view real-time updates:
+  - New  
+  - Under Processing  
+  - Completed  
+  - Rejected
+- Push notifications are sent for every update or status change.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### **4. Government Department Dashboard**
+- Employees can:
+  - View complaints assigned to their department  
+  - Update complaint status  
+  - Add notes  
+  - Request more information from the citizen
 
-### Premium Partners
+### **5. Admin Management Panel**
+- Admin can:
+  - Manage employee and department accounts  
+  - Assign roles and permissions  
+  - Monitor all submitted complaints  
+  - Export reports as PDF or CSV  
+  - View system logs and performance insights
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## ✔️ Non-Functional Requirements
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### **1. Concurrency & Conflict Prevention**
+- The system prevents multiple employees from editing the same complaint at the same time.  
+- Once a complaint is opened for processing, it becomes “locked” until the employee completes the action.
 
-## Code of Conduct
+### **2. Versioning & Audit Trail**
+- Every change (status update, notes, attachments) is stored with timestamps and user identifiers.
+- A full historical log is maintained for transparency.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### **3. Notification System**
+- The application sends instant notifications to users for:
+  - Complaint submission  
+  - Status changes  
+  - Additional information requests
 
-## Security Vulnerabilities
+### **4. Usability**
+- Interfaces are designed to be simple, intuitive, and suitable for all user types.
+- Clear buttons, labels, and step-by-step guidance are provided.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **5. Cross-Platform Compatibility**
+- Mobile app supports both iOS and Android.
+- Dashboard works on all modern browsers.
 
-## License
+### **6. Security**
+- Role-based access control (Citizen – Employee – Admin)
+- Protection against brute-force login attempts
+- Encrypted data storage and secure communication
+- Logging of failed login attempts
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### **7. Backup**
+- Automated daily/weekly database backups for complaints and attachments.
+- Backup recovery procedures ensured.
+
+### **8. Scalability & Performance**
+- The system can handle 100+ concurrent users with no noticeable performance drop.
+- Performance was tested to ensure acceptable response times.
+
+### **9. High Availability**
+- System designed to maintain stable operation and minimize downtime.
+
+---
+
+If you want, I can also:  
+✨ Add architecture diagrams  
+✨ Add API endpoints documentation  
+✨ Add technologies used (Flutter, React, Spring, etc.)  
+✨ Format it in a more stylish GitHub-friendly layout  
+
+Just tell me!  
