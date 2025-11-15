@@ -93,5 +93,35 @@ The application was developed following a layered architecture, separating the u
 
 ### **9. High Availability**
 - System designed to maintain stable operation and minimize downtime.
+- ---
+
+## 🚀 How to Run the Project
+
+Follow these steps to set up the Government Complaints Management System on your local machine:
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/OlaMorad/Government-Complaints-System.git
+cd Government-Complaints-System
+2. Install Dependencies
+bash
+نسخ الكود
+composer install
+3. Create Environment File
+bash
+نسخ الكود
+cp .env.example .env
+4. Generate Application Key
+bash
+نسخ الكود
+php artisan key:generate
+5. Run Database Migrations
+bash
+نسخ الكود
+php artisan migrate
+6. Start the Development Server
+bash
+نسخ الكود
+php artisan serve
 
 --- 
