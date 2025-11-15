@@ -95,3 +95,27 @@ The application was developed following a layered architecture, separating the u
 - System designed to maintain stable operation and minimize downtime.
 
 --- 
+✔️ Installation
+
+Steps
+
+ ### **1.Clone the repository:**
+git clone <https://github.com/OlaMorad/Government-Complaints-System.git>
+
+### **2.Install dependencies:**
+composer install
+
+### **3.Create the environment file:**
+cp .env.example .env
+
+### **4.Generate application key:**
+php artisan key:generate
+
+### **5.Run migrations:**
+php artisan migrate
+
+### **6.Run seeders:**
+php artisan db:seed
+
+### **7.Start the development server:**
+php artisan serve
