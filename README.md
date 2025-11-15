@@ -112,15 +112,14 @@ bash
 نسخ الكود
 cp .env.example .env
 4. Generate Application Key
-bash
 نسخ الكود
 php artisan key:generate
 5. Run Database Migrations
-bash
+
 نسخ الكود
 php artisan migrate
 6. Start the Development Server
-bash
+
 نسخ الكود
 php artisan serve
 
