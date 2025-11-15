@@ -7,6 +7,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ComplaintTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GovernmentEntityController;
+use App\Http\Controllers\IncomingComplaintsController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/user', function (Request $request) {
@@ -26,4 +27,7 @@ Route::prefix('employees')->middleware(['auth:sanctum', 'role:Super Admin'])->gr
     Route::post('create/{governmentEntityId}', [EmployeeController::class, 'createEmployee']);
     Route::post('assign-government-entity/{employeeId}', [EmployeeController::class, 'updateGovernmentEntity']);
 });
+
+Route::get('complaints/incoming', [IncomingComplaintsController::class, 'index'])->middleware(['auth:sanctum', 'role:Employee']);
+
 Route::get('complaint-types', [ComplaintTypeController::class, 'index']);
