@@ -6,7 +6,7 @@ use App\Models\Otp;
 class OtpService
 {
     // توليد وحفظ OTP مع البيانات المؤقتة
-    public function createOtp($name, $email, $password)
+    public function createOtp($name, $email, $password,$phone)
     {
         $otpCode = rand(100000, 999999);
         $expiresAt = now()->addMinutes(5);
@@ -17,7 +17,8 @@ class OtpService
                 'name' => $name,
                 'password' => bcrypt($password),
                 'otp_code' => $otpCode,
-                'expires_at' => $expiresAt
+                'expires_at' => $expiresAt,
+                'phone'=>$phone
             ]
         );
 
