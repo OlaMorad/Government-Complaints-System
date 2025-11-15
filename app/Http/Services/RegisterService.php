@@ -11,7 +11,7 @@ class RegisterService
 
     public function register($request)
     {
-        $otp = $this->otpService->createOtp($request->name, $request->email, $request->password);
+        $otp = $this->otpService->createOtp($request->name, $request->email, $request->password, $request->phone);
         $this->mailService->sendOtp($request->email, $otp->otp_code);
 
         return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك']);
@@ -28,12 +28,13 @@ class RegisterService
             'name' => $otp->name,
             'email' => $otp->email,
             'password' => $otp->password,
+            'phone' => $otp->phone,
         ]);
         $user->assignRole('Citizen');
 
         $this->otpService->deleteOtp($otp);
         $token = $this->tokenService->createToken($user);
 
-        return response()->json(['message' => 'تم إنشاء الحساب بنجاح', 'user' => $user,'token'=>$token]);
+        return response()->json(['message' => 'تم إنشاء الحساب بنجاح', 'user' => $user, 'token' => $token]);
     }
 }

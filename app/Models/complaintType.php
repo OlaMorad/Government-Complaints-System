@@ -8,6 +8,5 @@ class complaintType extends Model
 {
    protected $fillable=[
     'name',
-    'description'
    ];
 }

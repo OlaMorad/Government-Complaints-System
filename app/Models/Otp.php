@@ -11,6 +11,7 @@ class Otp extends Model
         'email',
         'password',
         'otp_code',
-        'expires_at'
+        'expires_at',
+        'phone'
     ];
 }
