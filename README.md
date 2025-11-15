@@ -95,7 +95,7 @@ The application was developed following a layered architecture, separating the u
 - System designed to maintain stable operation and minimize downtime.
 
 --- 
-✔️ Installation
+## ✔️ Installation
 
 Steps
 
