@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ComplaintRequest;
+use App\Models\Complaint;
 use Illuminate\Http\Request;
     use App\Http\Services\ComplaintService;
+use App\Enums\ComplaintStatusEnum;
+use App\Http\Requests\ComplaintIdRequest;
+use App\Http\Requests\ComplaintReferenceRequest;
+use App\Http\Requests\ComplaintRequest;
 use App\Http\Services\AttachmentService;
+use App\Http\Requests\FilterComplaintStatusRequest;
 
 class ComplaintController extends Controller
 {
-
- public function store(ComplaintRequest $request, ComplaintService $complaintService, AttachmentService $attachmentService)
+public function __construct(protected ComplaintService $complaintService,protected AttachmentService $attachmentService)
+{
+}
+ public function store(ComplaintRequest $request)
     {
         // رفع المرفقات وحفظ IDs
-        $attachments = $attachmentService->storeAttachments($request->file('attachments', []));
+        $attachments = $this->attachmentService->storeAttachments($request->file('attachments', []));
         // إنشاء الشكوى
-        $complaint = $complaintService->createComplaint($request->only(
+        $complaint = $this->complaintService->createComplaint($request->only(
             'complaint_type_id',
             'government_entity_id',
             'location_description',
@@ -27,11 +34,43 @@ class ComplaintController extends Controller
         }
 
         return response()->json([
-            'message' => 'تم تقديم الشكوى بنجاح',
+            'message' =>  'Your complaint has been submitted successfully.',
             'reference_number' => $complaint->reference_number,
             'complaint_id' => $complaint->id
         ]);
     }
+
+    public function show_all_my_complaints(){
+return $this->complaintService->show_all_my_complaints();
+    }
+
+public function filter_complant_status(FilterComplaintStatusRequest $request)
+{
+    $status = $request->validated()['status'];
+
+    $complaints = Complaint::where('user_id', auth()->id())
+        ->where('status', $status)
+        ->with('attachments')
+        ->get();
+
+    return response()->json([
+        'status' => $status,
+        'complaints' => $complaints,
+    ]);
+}
+
+public function findMyComplaintByReference(ComplaintReferenceRequest $request)
+{
+    return $this->complaintService->findMyComplaintByReference($request->reference_number);
+
+}
+
+public function findMyComplaintById( ComplaintIdRequest $request)
+{
+        return $this->complaintService->findMyComplaintById($request->id);
+
+}
+
 }
 
 

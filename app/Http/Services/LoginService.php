@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class LoginService
 {
 
-    public function __construct(protected TokenService $tokenService) {}
+    public function __construct(protected TokenService $tokenService, protected LoginAttemptService $loginAttemptService) {}
 
     public function login(array $data)
     {
@@ -19,8 +19,13 @@ class LoginService
         $user = User::where('email', $data['email'])->first();
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
+            if ($user && $user->hasRole('Citizen')) {
+                $this->loginAttemptService->recordFailedAttempt($user);
+            }
             return ApiResponse::sendError('Invalid email or password', 401);
         }
+        $this->loginAttemptService->resetAttempts($user);
+
         $token = $this->tokenService->createToken($user);
 
         // حفظ device_token إذا موجود

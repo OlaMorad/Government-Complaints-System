@@ -12,7 +12,8 @@ class Complaint extends Model
         'government_entity_id',
         'location_description',
         'problem_description',
-        'reference_number'
+        'reference_number',
+        'status'
     ];
 
         protected $casts = [

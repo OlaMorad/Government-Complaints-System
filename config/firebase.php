@@ -50,7 +50,12 @@ return [
              *
              */
 
-            'credentials' => env('FIREBASE_CREDENTIALS', env('GOOGLE_APPLICATION_CREDENTIALS')),
+            'credentials' => [
+                'credentials_file' => storage_path('app/' . env('FIREBASE_CREDENTIALS', '')),
+                'project_id' => env('FIREBASE_PROJECT_ID', null),
+                'sender_id' => env('FIREBASE_SENDER_ID', null),
+
+            ],
 
             /*
              * ------------------------------------------------------------------------
@@ -214,10 +219,7 @@ return [
 
                 'timeout' => env('FIREBASE_HTTP_CLIENT_TIMEOUT'),
 
-                'guzzle_middlewares' => [
-                    // MyInvokableMiddleware::class,
-                    // [MyMiddleware::class, 'static_method'],
-                ],
+                'guzzle_middlewares' => [],
             ],
         ],
     ],
