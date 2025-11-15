@@ -9,4 +9,9 @@ class GovernmentEntity extends Model
     protected $fillable=[
         'name'
     ];
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class, 'government_entity_id');
+    }
 }
