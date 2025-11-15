@@ -20,6 +20,10 @@ Route::post('verify-otp', [RegisterController::class,'verifyOtp']);
 Route::post('login',[LoginController::class,'login']);
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('store/complaint', [ComplaintController::class,'store'])->middleware('auth:sanctum');
+Route::get('show_all_my_complaints', [ComplaintController::class,'show_all_my_complaints'])->middleware('auth:sanctum');
+Route::get('filter_complant_status', [ComplaintController::class,'filter_complant_status'])->middleware('auth:sanctum');
+Route::get('findMyComplaintByReference', [ComplaintController::class,'findMyComplaintByReference'])->middleware('auth:sanctum');
+Route::get('/complaint/id', [ComplaintController::class, 'findMyComplaintById'])->middleware('auth:sanctum');
 
 
 Route::get('government-entities', [GovernmentEntityController::class, 'index']);

@@ -17,7 +17,6 @@ class AttachmentService
                 $attachments[] = $attachment->id;
             }
         }
-// dd(1);
         return $attachments;
     }
 }
