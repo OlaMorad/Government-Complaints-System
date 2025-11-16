@@ -18,6 +18,7 @@ Route::get('/user', function (Request $request) {
 Route::post('register', [RegisterController::class,'register']);
 Route::post('verify-otp', [RegisterController::class,'verifyOtp']);
 Route::post('login',[LoginController::class,'login']);
+Route::get('session/check', [LoginController::class, 'checkSession'])->middleware('auth:sanctum');
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('store/complaint', [ComplaintController::class,'store'])->middleware('auth:sanctum');
 Route::get('show_all_my_complaints', [ComplaintController::class,'show_all_my_complaints'])->middleware('auth:sanctum');
