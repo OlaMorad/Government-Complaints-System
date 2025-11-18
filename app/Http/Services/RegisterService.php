@@ -2,26 +2,27 @@
 
 namespace App\Http\Services;
 
+use app\Http\Services\UserActivityService;
 use App\Models\User;
 
 class RegisterService
 {
 
-    public function __construct(protected OtpService $otpService, protected MailService $mailService, protected TokenService $tokenService) {}
+    public function __construct(protected OtpService $otpService, protected MailService $mailService, protected TokenService $tokenService,protected UserActivityService $activity) {}
 
     public function register($request)
     {
         $otp = $this->otpService->createOtp($request->name, $request->email, $request->password, $request->phone);
         $this->mailService->sendOtp($request->email, $otp->otp_code);
 
-        return response()->json(['message' => 'A verification code has been sent to your email.']);
+        return response()->json(['message' => 'تم إرسال رمز التحقق إلى بريدك الإلكتروني.']);
     }
 
     public function verifyAndCreateUser($email, $otpCode)
     {
         $otp = $this->otpService->verifyOtp($email, $otpCode);
         if (!$otp) {
-            return response()->json(['message' =>  'The verification code is invalid or has expired.'], 422);
+            return response()->json(['message' =>   'رمز التحقق غير صالح أو انتهت صلاحيته.'], 422);
         }
 
         $user = User::create([
@@ -34,7 +35,8 @@ class RegisterService
 
         $this->otpService->deleteOtp($otp);
         $token = $this->tokenService->createToken($user);
+                $this->activity->add_activity($user->id ,  'تم انشاء الحساب ');
 
-        return response()->json(['message' =>'Account created successfully.', 'user' => $user, 'token' => $token]);
+        return response()->json(['message' => 'تم إنشاء الحساب بنجاح.', 'user' => $user, 'token' => $token]);
     }
 }

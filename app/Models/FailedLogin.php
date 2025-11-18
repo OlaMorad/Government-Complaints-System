@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class FailedLogin extends Model
 {
-    protected $fillable = ['user_id', 'attempts', 'last_attempt_at'];
+    protected $fillable = ['user_id', 'attempts', 'last_attempt_at','locked_until'];
 }

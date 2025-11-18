@@ -8,10 +8,14 @@ use Illuminate\Support\Str;
 
 class ComplaintService
 {
+    public function __construct(protected UserActivityService $activity)
+    {
+    }
     public function createComplaint(array $data, int $userId): Complaint
     {
         $data['user_id'] = $userId;
         $data['reference_number'] = $this->generateReferenceNumber();
+        $this->activity->add_activity($userId ,  'تم اضافة شكوى');
         return Complaint::create($data);
     }
 
@@ -35,7 +39,7 @@ class ComplaintService
             ->first();
         if (! $complaint) {
             return response()->json([
-                'message' => 'No complaint found with this reference number for the authenticated user.'
+                'message' =>  'لا توجد شكوى بهذا الرقم المرجعي للمستخدم الحالي.'
             ], 404);
         }
 
@@ -52,12 +56,12 @@ class ComplaintService
             ->first();
         if (! $complaint) {
             return response()->json([
-                'message' => 'No complaint found with this ID for the authenticated user.'
+                'message' => 'لا توجد شكوى بهذا المعرف للمستخدم الحالي.'
             ], 404);
         }
 
         return response()->json([
-            'message' => 'Complaint retrieved successfully.',
+            'message' =>'تم استرجاع الشكوى بنجاح.',
             'data' => $complaint
         ]);
     }

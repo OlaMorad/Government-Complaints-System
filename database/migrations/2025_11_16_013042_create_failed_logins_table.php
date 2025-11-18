@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('attempts')->default(0);
             $table->timestamp('last_attempt_at')->nullable();
+            $table->timestamp('locked_until')->nullable();
+
             $table->timestamps();
         });
     }

@@ -15,12 +15,12 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('register', [RegisterController::class,'register']);
-Route::post('verify-otp', [RegisterController::class,'verifyOtp']);
-Route::post('login',[LoginController::class,'login']);
+Route::post('register', [RegisterController::class,'register'])->middleware('throttle:3,1');
+Route::post('verify-otp', [RegisterController::class,'verifyOtp'])->middleware('throttle:3,2');
+Route::post('login',[LoginController::class,'login'])->middleware('throttle:5,1');
 Route::get('session/check', [LoginController::class, 'checkSession'])->middleware('auth:sanctum');
-Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
-Route::post('store/complaint', [ComplaintController::class,'store'])->middleware('auth:sanctum');
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum','throttle:3,1');
+Route::post('store/complaint', [ComplaintController::class,'store'])->middleware('auth:sanctum','throttle:10,1');
 Route::get('show_all_my_complaints', [ComplaintController::class,'show_all_my_complaints'])->middleware('auth:sanctum');
 Route::get('filter_complant_status', [ComplaintController::class,'filter_complant_status'])->middleware('auth:sanctum');
 Route::get('findMyComplaintByReference', [ComplaintController::class,'findMyComplaintByReference'])->middleware('auth:sanctum');
