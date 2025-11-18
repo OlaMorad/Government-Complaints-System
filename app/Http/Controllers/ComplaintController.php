@@ -34,7 +34,7 @@ public function __construct(protected ComplaintService $complaintService,protect
         }
 
         return response()->json([
-            'message' =>  'Your complaint has been submitted successfully.',
+            'message' => 'تم تقديم شكواك بنجاح.',
             'reference_number' => $complaint->reference_number,
             'complaint_id' => $complaint->id
         ]);
