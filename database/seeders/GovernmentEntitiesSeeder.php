@@ -14,12 +14,16 @@ class GovernmentEntitiesSeeder extends Seeder
     public function run(): void
     {
         $entities = [
-            'Ministry of Health',
-            'Ministry of Education',
-            'Ministry of Transport',
-            'Ministry of Finance',
-            'Ministry of Energy',    
-            'Ministry of Human Resources',
+            'وزارة الصحة',
+            'وزارة التربية والتعليم',
+            'وزارة النقل',
+            'وزارة المالية',
+            'وزارة الطاقة',
+            'وزارة الموارد البشرية',
+            'وزارة السياحة',
+            'وزارة الاتصالات',
+            'وزارة الشؤون الاجتماعية و العمل',
+            'وزارة التعليم العالي',
         ];
 
         foreach ($entities as $entity) {

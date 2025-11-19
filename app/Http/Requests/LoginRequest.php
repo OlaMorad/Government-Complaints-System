@@ -30,7 +30,10 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.exists' => 'No account found with this email',
+            'email.required' => 'يرجى إدخال البريد الإلكتروني.',
+            'email.email' => 'يجب إدخال بريد إلكتروني صالح.',
+            'email.exists' => 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.',
+            'password.required' => 'يرجى إدخال كلمة المرور.',
         ];
     }
 }

@@ -15,12 +15,12 @@ class ComplaintTypeSeeder extends Seeder
     {
 
         $types = [
-            'Service Complaint',
-            'Billing/Payment Issue',
-            'Technical Issue',
-            'Employee Misconduct',
-            'Policy Violation',
-            'Safety Concern',
+            'شكوى خدمة',
+            'مشكلة في الفوترة/المدفوعات',
+            'مشكلة تقنية',
+            'سوء سلوك موظف',
+            'مخالفة سياسات',
+            'مخاوف تتعلق بالسلامة',
         ];
 
         foreach ($types as $type) {

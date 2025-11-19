@@ -16,9 +16,9 @@ class CheckSessionService
         $user = Auth::user();
 
         if (!$user) {
-            return ApiResponse::sendError('Session expired or token invalid.', 401);
+            return ApiResponse::sendError('انتهت الجلسة أو أن رمز الدخول غير صالح.', 401);
         }
 
-        return ApiResponse::sendResponse(200, 'Session is active.', new UserResource($user));
+        return ApiResponse::sendResponse(200, 'الجلسة فعّالة.', new UserResource($user));
     }
 }
