@@ -16,30 +16,36 @@ class Complaint extends Model
         'status'
     ];
 
-        protected $casts = [
+    protected $casts = [
         'attachments' => 'array',
     ];
 
-public function attachments()
-{
-    return $this->belongsToMany(
-        ComplaintAttachment::class,
-
-    );
-}
+    public function attachments()
+    {
+        return $this->belongsToMany(
+            ComplaintAttachment::class,
+            'complaint_complaint_attachment',
+            'complaint_id',
+            'complaint_attachment_id'
+        );
+    }
 
     public function governmentEntity()
     {
         return $this->belongsTo(GovernmentEntity::class, 'government_entity_id');
     }
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-        public function type()
+    public function type()
     {
         return $this->belongsTo(ComplaintType::class, 'complaint_type_id');
+    }
+    public function history()
+    {
+        return $this->hasMany(ComplaintHistory::class, 'complaint_id');
     }
 }

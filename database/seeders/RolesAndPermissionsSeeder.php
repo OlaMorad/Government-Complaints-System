@@ -18,20 +18,45 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            'send complaint',
-            'process complaint',
-            'edit complaint information',
-            'edit complaint status',
-            'view complaints',
-            'view user activities'
+            'إرسال شكوى',
+            'فلترة الشكاوي',
+            'تعديل بيانات الشكوى',
+            'تتبع حالة الشكوى من خلال الرقم المرجعي',
+            'عرض الشكاوي الخاصة بجهة حكومية',
+            'معالجة الشكوى',
+            'عرض تفاصيل الشكوى',
+            'عرض كل الشكاوي',
+            'عرض كل الموظفين',
+            'تعيين موظف في جهة حكومية معينة',
+            'تعديل بيانات الموظف',
+            'عرض كل الجهات الحكومية',
+            'عرص انواع الشكاوي',
         ];
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
-     $roles = [
-            'Super Admin' => [  'edit complaint status', 'view complaints', 'view user activities'],
-            'Employee' => [ 'process complaint', 'view complaints'],
-            'Citizen' => ['send complaint', 'edit complaint information']
+        $roles = [
+            'المشرف العام' => [
+                'تعيين موظف في جهة حكومية معينة',
+                'تعديل بيانات الموظف',
+                'عرض كل الشكاوي',
+                'عرض كل الموظفين',
+                'عرض كل الجهات الحكومية',
+                'عرض تفاصيل الشكوى',
+                'عرص انواع الشكاوي'
+            ],
+            'الموظف' => [
+                'عرض الشكاوي الخاصة بجهة حكومية',
+                'معالجة الشكوى',
+                'عرض تفاصيل الشكوى'
+            ],
+            'المواطن' => [
+                'إرسال شكوى',
+                'فلترة الشكاوي',
+                'تعديل بيانات الشكوى',
+                'تتبع حالة الشكوى من خلال الرقم المرجعي',
+                'عرض تفاصيل الشكوى'
+            ]
         ];
 
         foreach ($roles as $roleName => $rolePermissions) {
@@ -41,6 +66,4 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $this->command->info('Roles and permissions have been seeded successfully.');
     }
-
-    }
-
+}

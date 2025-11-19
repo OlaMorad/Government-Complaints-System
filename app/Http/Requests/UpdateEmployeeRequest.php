@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,23 +22,21 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'phone'=>'required'
+            'name' => 'sometimes|string',
+            'email' => 'sometimes|email|unique:users,email,' . $this->employee,
+            'phone' => 'sometimes|string',
+            'password' => 'sometimes|string|confirmed',
+            'government_entity_id' => 'sometimes|exists:government_entities,id',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'يرجى إدخال الاسم.',
-            'email.required' => 'يرجى إدخال البريد الإلكتروني.',
             'email.email' => 'يجب إدخال بريد إلكتروني صالح.',
             'email.unique' => 'هذا البريد الإلكتروني مستخدم بالفعل.',
-            'password.required' => 'يرجى إدخال كلمة المرور.',
             'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
-            'phone.required' => 'يرجى إدخال رقم الهاتف.',
+            'government_entity_id.exists' => 'الجهة الحكومية المحددة غير موجودة.',
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use app\Http\Services\UserActivityService;
+use App\Http\Services\UserActivityService;
 use App\Models\User;
 
 class RegisterService
@@ -31,7 +31,7 @@ class RegisterService
             'password' => $otp->password,
             'phone' => $otp->phone,
         ]);
-        $user->assignRole('Citizen');
+        $user->assignRole('المواطن');
 
         $this->otpService->deleteOtp($otp);
         $token = $this->tokenService->createToken($user);

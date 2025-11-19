@@ -17,13 +17,13 @@ class SuperAdminSeeder extends Seeder
         $superAdmin = User::firstOrCreate(
             ['email' => 'admin@gmail.com'],
             [
-                'name'     => 'Super Admin',
+                'name'     => 'المشرف العام',
                 'phone'     => '999999999',
                 'password' => Hash::make('12345678')
             ]
         );
 
-        $superAdmin->assignRole('Super Admin');
+        $superAdmin->assignRole('المشرف العام');
 
         $this->command->info('Super Admin user created successfully.');
     }
