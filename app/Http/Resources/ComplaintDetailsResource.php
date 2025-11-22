@@ -23,10 +23,12 @@ class ComplaintDetailsResource extends JsonResource
             'status' => $this->status,
             'location_description' => $this->location_description,
             'problem_description' => $this->problem_description,
-            'attachments' => $this->attachments?->map(fn($att) => [
-                'id' => $att->id,
-                'file_path' => $att->file_path,
-            ]) ?? [],
+            'attachments' => $this->attachments()->get()->map(function ($att) {
+                return [
+                    'id' => $att->id,
+                    'file_path' => $att->file_path,
+                ];
+            }),
             'created_at' => $this->created_at?->format('Y-m-d H:i'),
             'updated_at' => $this->updated_at?->format('Y-m-d H:i'),
         ];

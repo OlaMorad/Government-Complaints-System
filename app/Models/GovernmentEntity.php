@@ -14,4 +14,10 @@ class GovernmentEntity extends Model
     {
         return $this->hasMany(Complaint::class, 'government_entity_id');
     }
+    
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_government_entities')
+            ->withTimestamps();
+    }
 }
