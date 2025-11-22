@@ -33,7 +33,7 @@ Route::get('government-entities', [GovernmentEntityController::class, 'index']);
 Route::prefix('employees')->middleware(['auth:sanctum', 'role:المشرف العام'])->group(function () {
     Route::get('all', [EmployeeController::class, 'index']);
     Route::post('/create/{governmentEntityId}', [EmployeeController::class, 'createEmployee']);
-    Route::post('/update/{employeeId}', [EmployeeController::class, 'updateEmployee']);
+    Route::put('/update/{employeeId}', [EmployeeController::class, 'updateEmployee']);
     Route::delete('/delete/{employeeId}', [EmployeeController::class, 'deleteEmployee']);
 });
 Route::prefix('complaints')->middleware(['auth:sanctum'])->group(function () {

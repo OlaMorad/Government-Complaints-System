@@ -16,6 +16,7 @@ class Employee extends Model
 
     public function governmentEntities()
     {
-        return $this->belongsToMany(GovernmentEntity::class, 'employee_government_entities');
+        return $this->belongsToMany(GovernmentEntity::class, 'employee_government_entities')
+            ->withTimestamps();
     }
 }
