@@ -1,6 +1,6 @@
 <?php
 
-namespace App\http\Services;
+namespace App\Http\Services;
 
 use App\Models\User;
 use App\Models\DeviceToken;
