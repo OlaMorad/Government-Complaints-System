@@ -39,7 +39,7 @@ class ComplaintStatusService
         if (!$complaint) {
             return ApiResponse::sendError('الشكوى غير موجودة.', 404);
         }
-        
+
         // التحقق من أن الحالة الحالية هي "قيد المعالجة"
         if ($complaint->status !== ComplaintStatusEnum::IN_PROGRESS->value) {
             return ApiResponse::sendError('لا يمكنك تغيير حالة هذه الشكوى إذا لم تكن قيد المعالجة.', 403);
@@ -50,4 +50,23 @@ class ComplaintStatusService
 
         return ApiResponse::sendResponse(200, 'تم تغيير حالة الشكوى بنجاح.', $newStatus);
     }
+
+     function addAttachmentHistory(int $complaintId, int $userId)
+{
+    $complaint = Complaint::findOrFail($complaintId);
+
+    // جلب آخر حالة للشكوى
+
+    // إضافة سجل جديد في الهيستوري
+    ComplaintHistory::create([
+        'complaint_id' => $complaint->id,
+        'old_status'    => $complaint->status,  // نفس الحالة القديمة
+        'new_status'=>$complaint->status,
+        'changed_by'=>$userId,
+        'notes'        => "تم رفع مرفقات من قبل المواطن صاحب الـ ID {$userId}",
+    ]);
+
+    return true;
 }
+}
+

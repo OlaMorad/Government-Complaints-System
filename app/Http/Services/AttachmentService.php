@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Services;
 
-use App\Models\ComplaintAttachment;
+use App\Models\Complaint;
 use Illuminate\Http\UploadedFile;
+use App\Enums\ComplaintStatusEnum;
+use App\Models\ComplaintAttachment;
 
 class AttachmentService
 {
@@ -18,5 +21,25 @@ class AttachmentService
             }
         }
         return $attachments;
+    }
+
+    public function getUserComplaint(int $complaintId): ?Complaint
+    {
+        return Complaint::where('id', $complaintId)
+            ->where('user_id', auth()->id())
+            ->first();
+    }
+
+    public function isComplaintClosed(Complaint $complaint): bool
+    {
+        return in_array($complaint->status, [
+            ComplaintStatusEnum::REJECTED->value,
+            ComplaintStatusEnum::COMPLETED->value,
+        ]);
+    }
+
+    public function sendJsonError(string $message, int $code)
+    {
+        return response()->json(['message' => $message], $code);
     }
 }

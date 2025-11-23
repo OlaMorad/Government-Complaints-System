@@ -2,15 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ComplaintController;
-use App\Http\Controllers\ComplaintHistoryController;
-use App\Http\Controllers\ComplaintSearchController;
 use App\Http\Controllers\ComplaintTypeController;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ComplaintSearchController;
+use App\Http\Controllers\ComplaintHistoryController;
 use App\Http\Controllers\GovernmentEntityController;
 use App\Http\Controllers\IncomingComplaintsController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ComplaintAttachmentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -49,3 +50,4 @@ Route::prefix('complaints')->middleware(['auth:sanctum', 'role:الموظف'])->
 
 
 Route::get('complaint-types', [ComplaintTypeController::class, 'index']);
+Route::post('addAttachments/{complaintId}', [ComplaintAttachmentController::class, 'addAttachments'])->middleware('auth:sanctum');
