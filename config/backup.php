@@ -7,7 +7,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_NAME', 'laravel-backup'),
+        'name' => env('APP_NAME', 'backup-database'),
 
         'source' => [
             'files' => [
@@ -151,7 +151,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                'google',
             ],
         ],
 
@@ -210,14 +210,14 @@ return [
          */
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
-        'mail' => [
-            'to' => 'your@example.com',
+        // 'mail' => [
+        //     'to' => 'your@example.com',
 
-            'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
-            ],
-        ],
+        //     'from' => [
+        //         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        //         'name' => env('MAIL_FROM_NAME', 'Example'),
+        //     ],
+        // ],
 
         'slack' => [
             'webhook_url' => '',
