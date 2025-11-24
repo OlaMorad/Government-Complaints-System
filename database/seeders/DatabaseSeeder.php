@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             SuperAdminSeeder::class,
             GovernmentEntitiesSeeder::class,
-            ComplaintTypeSeeder::class
+            ComplaintTypeSeeder::class,
+            CitizenSeeder::class,
         ]);
         }
 }

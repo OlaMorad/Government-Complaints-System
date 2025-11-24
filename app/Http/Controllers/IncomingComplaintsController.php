@@ -12,10 +12,12 @@ class IncomingComplaintsController extends Controller
 {
     public function __construct(protected IncomingComplaintsService $incoming_complaints) {}
 
-    public function all()
+    public function all(Request $request)
     {
-        $complaints=Complaint::all();
-        return ApiResponse::sendResponse(200,'تم عرض جميع الشكاوي بنجاح', IncomingComplaintResource::collection($complaints));
+        $perPage = $request->get('per_page', 10);
+        $complaints = Complaint::orderBy('created_at', 'desc')->paginate($perPage);
+        return ApiResponse::sendResponse(200,'تم عرض جميع الشكاوي بنجاح', IncomingComplaintResource::collection($complaints)
+        ->response()->getData(true));
     }
 
     public function index()
