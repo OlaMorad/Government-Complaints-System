@@ -37,7 +37,7 @@ class EmployeeService
         // ربط الموظف بالجهة الحكومية
         $employee->governmentEntities()->attach($governmentEntity->id);
 
-        return ApiResponse::sendResponse(200, 'تم إنشاء الموظف بنجاح.', new EmployeeResource($employee));
+        return ApiResponse::sendResponse(201, 'تم إنشاء الموظف بنجاح.', new EmployeeResource($employee));
     }
 
     public function updateEmployee(int $employeeId, array $data)
