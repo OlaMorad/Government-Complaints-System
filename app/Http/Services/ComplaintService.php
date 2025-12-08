@@ -3,8 +3,9 @@
 namespace App\Http\Services;
 
 use App\Models\Complaint;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ComplaintResource;
 
 class ComplaintService
 {
@@ -26,7 +27,11 @@ class ComplaintService
     public function show_all_my_complaints()
     {
         $authUser = Auth::id();
-        return Complaint::where('user_id', $authUser)->with('attachments')->get();
+ $complaints = Complaint::where('user_id', $authUser)
+    ->with(['attachments', 'governmentEntity', 'type'])
+    ->get();
+        return ComplaintResource::collection($complaints);
+
     }
 
     public function findMyComplaintByReference($referenceNumber)
