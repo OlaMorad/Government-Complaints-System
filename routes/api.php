@@ -26,7 +26,7 @@ Route::get('session/check', [LoginController::class, 'checkSession'])->middlewar
 Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum', 'throttle:3,1');
 Route::post('store/complaint', [ComplaintController::class, 'store'])->middleware('auth:sanctum', 'throttle:10,1');
 Route::get('show_all_my_complaints', [ComplaintController::class, 'show_all_my_complaints'])->middleware('auth:sanctum');
-Route::get('filter_complant_status', [ComplaintController::class, 'filter_complant_status'])->middleware('auth:sanctum');
+Route::get('filter_complaint_status', [ComplaintController::class, 'filter_complaint_status'])->middleware('auth:sanctum');
 Route::get('findMyComplaintByReference', [ComplaintController::class, 'findMyComplaintByReference'])->middleware('auth:sanctum');
 Route::get('/complaint/id', [ComplaintController::class, 'findMyComplaintById'])->middleware('auth:sanctum');
 

@@ -24,15 +24,15 @@ class ComplaintService
     {
         return 'CMP-' . strtoupper(Str::random(10));
     }
-    public function show_all_my_complaints()
-    {
-        $authUser = Auth::id();
- $complaints = Complaint::where('user_id', $authUser)
-    ->with(['attachments', 'governmentEntity', 'type'])
-    ->get();
-        return ComplaintResource::collection($complaints);
+//     public function show_all_my_complaints()
+//     {
+//         $authUser = Auth::id();
+//  $complaints = Complaint::where('user_id', $authUser)
+//     ->with(['attachments', 'governmentEntity', 'type'])
+//     ->get();
+//         return ComplaintResource::collection($complaints);
 
-    }
+//     }
 
     public function findMyComplaintByReference($referenceNumber)
     {
@@ -70,4 +70,19 @@ class ComplaintService
             'data' => $complaint
         ]);
     }
+
+        public function filter_complaint_status( $request)
+{
+
+    $authUser = Auth::id();
+    $query = Complaint::where('user_id', $authUser)
+        ->with(['attachments', 'governmentEntity', 'type']);
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    return ComplaintResource::collection($query->get());
+}
+
 }

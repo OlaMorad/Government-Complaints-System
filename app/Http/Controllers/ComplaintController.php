@@ -6,10 +6,12 @@ use App\Models\Complaint;
 use Illuminate\Http\Request;
     use App\Http\Services\ComplaintService;
 use App\Enums\ComplaintStatusEnum;
-use App\Http\Requests\ComplaintIdRequest;
-use App\Http\Requests\ComplaintReferenceRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ComplaintRequest;
 use App\Http\Services\AttachmentService;
+use App\Http\Requests\ComplaintIdRequest;
+use App\Http\Resources\ComplaintResource;
+use App\Http\Requests\ComplaintReferenceRequest;
 use App\Http\Requests\FilterComplaintStatusRequest;
 
 class ComplaintController extends Controller
@@ -40,23 +42,16 @@ public function __construct(protected ComplaintService $complaintService,protect
         ]);
     }
 
-    public function show_all_my_complaints(){
-return $this->complaintService->show_all_my_complaints();
-    }
+//     public function show_all_my_complaints(){
+// return $this->complaintService->show_all_my_complaints();
+//     }
 
-public function filter_complant_status(FilterComplaintStatusRequest $request)
+    //في حال مررنا حالة يفلترها و اذا ما مررنا شي يرجع كل شكاوي المواطن
+public function filter_complaint_status(FilterComplaintStatusRequest $request)
 {
-    $status = $request->validated()['status'];
 
-    $complaints = Complaint::where('user_id', auth()->id())
-        ->where('status', $status)
-        ->with('attachments')
-        ->get();
+    return $this->complaintService->filter_complaint_status($request);
 
-    return response()->json([
-        'status' => $status,
-        'complaints' => $complaints,
-    ]);
 }
 
 public function findMyComplaintByReference(ComplaintReferenceRequest $request)
