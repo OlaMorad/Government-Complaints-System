@@ -16,9 +16,9 @@ class Complaint extends Model
         'status'
     ];
 
-    protected $casts = [
-        'attachments' => 'array',
-    ];
+    // protected $casts = [
+    //     'attachments' => 'array',
+    // ];
 
     public function attachments()
     {

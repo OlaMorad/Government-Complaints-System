@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< Updated upstream
     "content-hash": "d23e5ddf08bb38ddf6d3d0c64b6dc4b1",
+=======
+    "content-hash": "ebc9c9fc107de256a1272cee20ac6be3",
+>>>>>>> Stashed changes
     "packages": [
         {
             "name": "beste/clock",
