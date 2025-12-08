@@ -24,7 +24,7 @@ class FilterComplaintStatusRequest extends FormRequest
     {
        return [
             'status' => [
-                'required',
+                'sometimes',
                 'in:' . implode(',', array_column(ComplaintStatusEnum::cases(), 'value')),
             ],
         ];
