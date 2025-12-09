@@ -22,7 +22,7 @@ class attachmentsRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'attachments.*' => 'required|file|max:20480', // 20MB
+        'attachments.*' => 'required|file|mimes:jpg,png,pdf,docx|max:20480', // 20MB
         ];
     }
 }
