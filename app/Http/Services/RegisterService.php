@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Services\UserActivityService;
+use App\Models\DeviceToken;
 use App\Models\User;
 
 class RegisterService
