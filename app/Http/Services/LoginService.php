@@ -52,7 +52,6 @@ class LoginService
     public function logout($user)
     {
         $user->currentAccessToken()->delete();
-        DeviceToken::where('user_id', $user->id)->delete();
         $this->activity->add_activity($user->id,  'تم تسجيل الخروج');
 
         return ApiResponse::sendResponse(200, 'تم تسجيل الخروج بنجاح');
