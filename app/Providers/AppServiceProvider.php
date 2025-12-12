@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Exception $e) {
             // your exception handling logic
         }
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        // app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         Complaint::observe(ComplaintObserver::class);
     }
 }
