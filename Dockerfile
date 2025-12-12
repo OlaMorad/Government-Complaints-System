@@ -26,7 +26,6 @@ RUN cp .env.example .env || true
 
 # توليد مفتاح التطبيق و JWT secret
 RUN php artisan key:generate
-RUN php artisan jwt:secret
 
 # نسخ السكربت وتشغيله عند بدء الحاوية
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
