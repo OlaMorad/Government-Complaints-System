@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -67,7 +67,17 @@ return [
             'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
             'folder' => env('GOOGLE_DRIVE_FOLDER_ID'),
         ],
-
+        
+        'idrive' => [
+            'driver' => 's3',
+            'key' => env('IDRIVE_ACCESS_KEY'),
+            'secret' => env('IDRIVE_SECRET_KEY'),
+            'region' => env('IDRIVE_REGION'),
+            'bucket' => env('IDRIVE_BUCKET'),
+            'endpoint' => env('IDRIVE_ENDPOINT'),
+            'use_path_style_endpoint' => true,
+            'throw' => true,
+        ],
 
     ],
 
